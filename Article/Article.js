@@ -151,6 +151,10 @@ function newArticle(articleData) {
     article.classList.toggle('article-open');
   });
 
+  // $(expand).click(function () {
+  //   $(article).slideDown();
+  // });
+
   //Step 3: Return the entire component
   return article;
 }
@@ -164,3 +168,82 @@ data.forEach((dataObj) => {
 });
 
 //Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+
+// STRETCH
+
+const outerDiv = document.createElement('div');
+const formContainer = document.createElement('form');
+const titleLabel = document.createElement('label');
+const titleInput = document.createElement('input');
+const dateLabel = document.createElement('label');
+const dateInput = document.createElement('input');
+const paraLabelOne = document.createElement('label');
+const paraInputOne = document.createElement('input');
+const paraLabelTwo = document.createElement('label');
+const paraInputTwo = document.createElement('input');
+const paraLabelThree = document.createElement('label');
+const paraInputThree = document.createElement('input');
+const submitButton = document.createElement('button');
+
+outerDiv.appendChild(formContainer);
+formContainer.appendChild(titleLabel);
+formContainer.appendChild(titleInput);
+formContainer.appendChild(dateLabel);
+formContainer.appendChild(dateInput);
+formContainer.appendChild(paraLabelOne);
+formContainer.appendChild(paraInputOne);
+formContainer.appendChild(paraLabelTwo);
+formContainer.appendChild(paraInputTwo);
+formContainer.appendChild(paraLabelThree);
+formContainer.appendChild(paraInputThree);
+formContainer.appendChild(submitButton);
+
+outerDiv.setAttribute('class', 'form');
+formContainer.setAttribute('name', 'entryForm');
+titleLabel.setAttribute('for', 'title');
+titleInput.setAttribute('type', 'text');
+titleInput.setAttribute('id', 'title');
+titleInput.setAttribute('name', 'title');
+dateLabel.setAttribute('for', 'date');
+dateInput.setAttribute('type', 'text');
+dateInput.setAttribute('id', 'date');
+dateInput.setAttribute('name', 'date');
+paraLabelOne.setAttribute('for', 'firstPara');
+paraInputOne.setAttribute('type', 'text');
+paraInputOne.setAttribute('id', 'firstPara');
+paraInputOne.setAttribute('name', 'firstPara');
+paraLabelTwo.setAttribute('for', 'secondPara');
+paraInputTwo.setAttribute('type', 'text');
+paraInputTwo.setAttribute('id', 'secondPara');
+paraInputTwo.setAttribute('name', 'secondPara');
+paraLabelThree.setAttribute('for', 'thirdPara');
+paraInputThree.setAttribute('type', 'text');
+paraInputThree.setAttribute('id', 'thirdPara');
+paraInputThree.setAttribute('name', 'thirdPara');
+
+titleLabel.textContent = 'Article Title:';
+dateLabel.textContent = 'Date Written:';
+paraLabelOne.textContent = 'Paragraph One:';
+paraLabelTwo.textContent = 'Paragraph Two';
+paraLabelThree.textContent = 'Paragraph Three';
+
+const formLocation = document.querySelector('.articles').prepend(outerDiv);
+
+function addArticle() {
+  let object = {
+    title: document.entryForm.title.value,
+    date: document.entryForm.date.value,
+    firstParagraph: document.entryForm.firstPara.value,
+    secondParagraph: document.entryForm.secondPara.value,
+    thirdParagraph: document.entryForm.thirdPara.value,
+  };
+  return object;
+}
+
+submitButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  let newObj = addArticle();
+  console.log(newObj);
+  let newHTML = newArticle(newObj);
+  articlesDiv.appendChild(newHTML);
+});

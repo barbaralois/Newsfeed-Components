@@ -105,6 +105,9 @@
 .menu--open {
   display: block;
 }
+form {
+  display: flex;
+}
 html,
 body {
   margin: 0;
