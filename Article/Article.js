@@ -20,7 +20,7 @@ const data = [
     thirdParagraph: `Dagobah hutt jawa leia calamari ventress skywalker yoda. Binks wicket hutt coruscant sidious
         naboo ackbar tatooine. Hutt lars padmé darth. Maul solo darth darth jabba qui-gon chewbacca darth maul. Moff baba wicket
         han. C-3po antilles moff qui-gon ahsoka aayla dooku amidala. Palpatine droid amidala droid k-3po twi'lek padmé wookiee. Leia
-        moff calamari mon obi-wan. Solo grievous lando coruscant. Jinn darth palpatine obi-wan mon.`
+        moff calamari mon obi-wan. Solo grievous lando coruscant. Jinn darth palpatine obi-wan mon.`,
   },
   {
     title: 'Javascript and You, ES6',
@@ -40,7 +40,7 @@ const data = [
     thirdParagraph: `Toad-like smile Flourish and Blotts he knew I’d come back Quidditch World Cup. Fat Lady baubles banana fritters fairy lights 
         Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven 
         roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot 
-        sing above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix tears good clean match.`
+        sing above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix tears good clean match.`,
   },
   {
     title: 'React vs Angular vs Vue',
@@ -68,7 +68,7 @@ const data = [
 
     thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
         Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
-        Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
+        Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`,
   },
   {
     title: 'Professional Software Development in 2019',
@@ -84,11 +84,18 @@ const data = [
 
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
-          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`,
+  },
+  {
+    title: 'Learning DOM Manipulation',
+    date: 'May 6th, 2020',
+    firstParagraph: `Ragdoll. Jaguar tiger, but british shorthair grimalkin panther donskoy. Jaguar siberian burmese or maine coon cheetah. Burmese american shorthair but american bobtail ocicat and tiger. Persian thai, so tiger puma turkish angora sphynx and mouser.`,
+    secondParagraph: `Burmese cougar, panther tomcat, scottish fold. Tom maine coon so munchkin. Tabby malkin, yet singapura bobcat or american shorthair jaguar. Tiger ocelot so panther so himalayan, so thai yet tabby. Himalayan puma or singapura ocicat maine coon donskoy. Bengal.`,
+    thirdParagraph: `Russian blue manx. Kitten siamese havana brown persian tomcat burmese. Munchkin russian blue. Ocelot bombay mouser. American shorthair birman sphynx or cheetah ocicat.`,
+  },
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+/*Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
     <h2>{title of the article}</h2>
@@ -101,14 +108,142 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above. */
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+function newArticle(articleData) {
+  const {
+    title,
+    date,
+    firstParagraph,
+    secondParagraph,
+    thirdParagraph,
+  } = articleData;
 
-  Step 3: return the entire component.
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstPara = document.createElement('p');
+  const secondPara = document.createElement('p');
+  const thirdPara = document.createElement('p');
+  const expand = document.createElement('span');
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstPara);
+  article.appendChild(secondPara);
+  article.appendChild(thirdPara);
+  article.appendChild(expand);
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expand.classList.add('expandButton');
 
-*/
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  firstPara.textContent = firstParagraph;
+  secondPara.textContent = secondParagraph;
+  thirdPara.textContent = thirdParagraph;
+  expand.textContent = 'Click Here';
+
+  //Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div
+
+  expand.addEventListener('click', (event) => {
+    article.classList.toggle('article-open');
+  });
+
+  // $(expand).click(function () {
+  //   $(article).slideDown();
+  // });
+
+  //Step 3: Return the entire component
+  return article;
+}
+
+//Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+const articlesDiv = document.querySelector('.articles');
+
+data.forEach((dataObj) => {
+  const article = newArticle(dataObj);
+  articlesDiv.appendChild(article);
+});
+
+//Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+
+// STRETCH
+
+const outerDiv = document.createElement('div');
+const formContainer = document.createElement('form');
+const titleLabel = document.createElement('label');
+const titleInput = document.createElement('input');
+const dateLabel = document.createElement('label');
+const dateInput = document.createElement('input');
+const paraLabelOne = document.createElement('label');
+const paraInputOne = document.createElement('input');
+const paraLabelTwo = document.createElement('label');
+const paraInputTwo = document.createElement('input');
+const paraLabelThree = document.createElement('label');
+const paraInputThree = document.createElement('input');
+const submitButton = document.createElement('button');
+
+outerDiv.appendChild(formContainer);
+formContainer.appendChild(titleLabel);
+formContainer.appendChild(titleInput);
+formContainer.appendChild(dateLabel);
+formContainer.appendChild(dateInput);
+formContainer.appendChild(paraLabelOne);
+formContainer.appendChild(paraInputOne);
+formContainer.appendChild(paraLabelTwo);
+formContainer.appendChild(paraInputTwo);
+formContainer.appendChild(paraLabelThree);
+formContainer.appendChild(paraInputThree);
+formContainer.appendChild(submitButton);
+
+outerDiv.setAttribute('class', 'form');
+formContainer.setAttribute('name', 'entryForm');
+titleLabel.setAttribute('for', 'title');
+titleInput.setAttribute('type', 'text');
+titleInput.setAttribute('id', 'title');
+titleInput.setAttribute('name', 'title');
+dateLabel.setAttribute('for', 'date');
+dateInput.setAttribute('type', 'text');
+dateInput.setAttribute('id', 'date');
+dateInput.setAttribute('name', 'date');
+paraLabelOne.setAttribute('for', 'firstPara');
+paraInputOne.setAttribute('type', 'text');
+paraInputOne.setAttribute('id', 'firstPara');
+paraInputOne.setAttribute('name', 'firstPara');
+paraLabelTwo.setAttribute('for', 'secondPara');
+paraInputTwo.setAttribute('type', 'text');
+paraInputTwo.setAttribute('id', 'secondPara');
+paraInputTwo.setAttribute('name', 'secondPara');
+paraLabelThree.setAttribute('for', 'thirdPara');
+paraInputThree.setAttribute('type', 'text');
+paraInputThree.setAttribute('id', 'thirdPara');
+paraInputThree.setAttribute('name', 'thirdPara');
+
+titleLabel.textContent = 'Article Title:';
+dateLabel.textContent = 'Date Written:';
+paraLabelOne.textContent = 'Paragraph One:';
+paraLabelTwo.textContent = 'Paragraph Two';
+paraLabelThree.textContent = 'Paragraph Three';
+
+const formLocation = document.querySelector('.articles').prepend(outerDiv);
+
+function addArticle() {
+  let object = {
+    title: document.entryForm.title.value,
+    date: document.entryForm.date.value,
+    firstParagraph: document.entryForm.firstPara.value,
+    secondParagraph: document.entryForm.secondPara.value,
+    thirdParagraph: document.entryForm.thirdPara.value,
+  };
+  return object;
+}
+
+submitButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  let newObj = addArticle();
+  console.log(newObj);
+  let newHTML = newArticle(newObj);
+  articlesDiv.appendChild(newHTML);
+});
